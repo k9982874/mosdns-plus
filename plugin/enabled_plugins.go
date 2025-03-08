@@ -45,6 +45,7 @@ import (
 	_ "github.com/IrineSistiana/mosdns/v5/plugin/executable/black_hole"
 	_ "github.com/IrineSistiana/mosdns/v5/plugin/executable/cache"
 	_ "github.com/IrineSistiana/mosdns/v5/plugin/executable/debug_print"
+	_ "github.com/IrineSistiana/mosdns/v5/plugin/executable/dnsproxy"
 	_ "github.com/IrineSistiana/mosdns/v5/plugin/executable/drop_resp"
 	_ "github.com/IrineSistiana/mosdns/v5/plugin/executable/dual_selector"
 	_ "github.com/IrineSistiana/mosdns/v5/plugin/executable/ecs_handler"
