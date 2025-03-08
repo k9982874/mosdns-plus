@@ -1,19 +1,3 @@
-# mosdns plus
-
-This repository forked from [mosdns](https://github.com/IrineSistiana/mosdns), a great dns server.
-
-This branch aims to add some enhanced features that that are not officially accepted by mosdns.
-
-### Feature list
-**AdGurad DNSProxy**
-Gives mosdsn the ability to query DNS records using AdGuard DNSProxy.
-
-Supported protocols: *DNS-over-TLS*, *DNS-over-HTTPS*, *DNSCrypt*, and *DNS-over-QUIC*
-
-Reference: https://github.com/AdguardTeam/dnsproxy
-
-### A configuration example
-```yaml
 ## config.example.yaml
 ## -- Log Config -- ##
 log:
@@ -43,19 +27,20 @@ plugins:
           addr: sdns://AQMAAAAAAAAADDkuOS45Ljk6ODQ0MyBnyEe4yHWM0SAkVUO-dWdG3zTfHYTAC4xHA2jfgh2GPhkyLmRuc2NyeXB0LWNlcnQucXVhZDkubmV0
         - tag: Quad9-DNS-over-HTTPS
           addr: https://dns.quad9.net/dns-query
-          insecure_skip_verify: true
-          bootstrap:
-            - 8.8.8.8
-            - 1.1.1.1
-          timeout: 15
-        - tag: Quad9-DNS-over-TLS
-          addr: https://dns.quad9.net/dns-query
-          insecure_skip_verify: true
+          insecure_skip_verify: true # allow insecure ssl, true or false
+          # specify a DNS resolver to resolve the value in the addr field, nullable
           bootstrap:
             - 8.8.8.8
             - 1.1.1.1
           timeout: 15 # query timeout
-
+        - tag: Quad9-DNS-over-TLS
+          addr: https://dns.quad9.net/dns-query
+          insecure_skip_verify: true # allow insecure ssl, true or false
+          # specify a DNS resolver to resolve the value in the addr field, nullable
+          bootstrap:
+            - 8.8.8.8
+            - 1.1.1.1
+          timeout: 15 # query timeout
   - tag: query_dnsproxy
     type: sequence
     args:
@@ -67,7 +52,7 @@ plugins:
     args:
       - exec: query_summary entry
 
-      # query taobao.com with DNS-over-QUIC protocol on ali
+      # query taobao.com with DNS-over-QUIC	protocol on ali
       - matches:
         - qname taobao.com
         exec: dnsproxy quic://dns.alidns.com:853
@@ -93,4 +78,3 @@ plugins:
     args:
       entry: main
       listen: :54
-```
